@@ -66,7 +66,7 @@ export default function TodoForm({ userId }: { userId: string }) {
 
 	return (
 		<Form {...form}>
-			<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+			<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
 				<FormField
 					control={form.control}
 					name="title"
@@ -115,7 +115,7 @@ export default function TodoForm({ userId }: { userId: string }) {
 						</FormItem>
 					)}
 				/>
-				<Button type="submit" disabled={isPending} className="w-full">
+				<Button type="submit" disabled={isPending} className="w-full" size={"lg"}>
 					{isPending ? "Creating..." : "Create Todo"}
 				</Button>
 			</form>
