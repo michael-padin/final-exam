@@ -20,7 +20,7 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body
-				className={`${inter.className} antialiased bg-gradient-to-br from-purple-600 via-pink-500 to-purple-500 min-h-screen bg-opacity-90`}
+				className={`${inter.className} `}
 			>
 				<div
 					className="fixed inset-0 bg-repeat z-0"

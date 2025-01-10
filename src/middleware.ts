@@ -8,9 +8,11 @@ export default auth(async function middleware(req) {
 	const { pathname } = nextUrl
 	const isLoggedIn = !!req.auth
 	const user = req.auth?.user
+
+	console.log('pathname :>> ', pathname);
 	
-	if (!user){
-		new URL("/login", nextUrl)
+	if (pathname === "/" && !isLoggedIn	) {
+		return NextResponse.redirect(new URL("/sign-up", nextUrl))
 	}
 	
 	return
