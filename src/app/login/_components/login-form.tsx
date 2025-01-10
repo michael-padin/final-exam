@@ -18,6 +18,7 @@ import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
 import { login } from "@/app/actions/login";
 import { LoginSchema, LoginSchemaType } from "@/types/login";
+import Link from "next/link";
 
 export const LoginForm = () => {
 	const router = useRouter();
@@ -30,7 +31,7 @@ export const LoginForm = () => {
 		},
 	});
 
-	const onSubmit = async (data: LoginSchemaType	) => {
+	const onSubmit = async (data: LoginSchemaType) => {
 		startTransition(async () => {
 			const hello = await login(data);
 
@@ -46,7 +47,6 @@ export const LoginForm = () => {
 		<Form {...form}>
 			<form onSubmit={form.handleSubmit(onSubmit)} autoComplete="off">
 				<fieldset disabled={isPending} className="space-y-4 w-full">
-				
 					<FormField
 						control={form.control}
 						name="email"
@@ -99,6 +99,15 @@ export const LoginForm = () => {
 
 					<Button type="submit" className="w-full" disabled={isPending}>
 						{isPending ? <Loader2 className="animate-spin" /> : "Login"}
+					</Button>
+					<Button
+						type="submit"
+						className="w-full"
+						disabled={isPending}
+						asChild
+						variant={"secondary"}
+					>
+						<Link href="/sign-up">Login</Link>
 					</Button>
 				</fieldset>
 			</form>
