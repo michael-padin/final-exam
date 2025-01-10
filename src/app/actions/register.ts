@@ -18,7 +18,7 @@ export const register = async (data: SignupSchemaType) => {
 
 		const newUser = await db.user.create({
 			data: {
-				// name: data.firstName + " " + data.lastName,
+				name: data.name,
 				email: data.email,
 				password: hashedPassword,
 				isEmailVerified: false
