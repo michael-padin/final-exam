@@ -19,8 +19,10 @@ import { useRouter } from "next/navigation";
 import { login } from "@/app/actions/login";
 import { LoginSchema, LoginSchemaType } from "@/types/login";
 import Link from "next/link";
+import { useToast } from "@/hooks/use-toast";
 
 export const LoginForm = () => {
+	const toast = useToast();
 	const router = useRouter();
 	const [isPending, startTransition] = useTransition();
 	const form = useForm<LoginSchemaType>({
@@ -33,12 +35,15 @@ export const LoginForm = () => {
 
 	const onSubmit = async (data: LoginSchemaType) => {
 		startTransition(async () => {
-			const hello = await login(data);
+			const { error } = await login(data);
 
-			// if (error) {
-			// 	showErrorToast(error)
-			// 	return
-			// }
+			if (error) {
+				toast.toast({
+					title: error,
+					variant: "destructive",
+				});
+				return
+			}
 			router.push("/");
 		});
 	};

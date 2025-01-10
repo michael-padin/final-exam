@@ -26,6 +26,10 @@ export const login = async (data: LoginSchemaType) => {
 			}
 		})
 
+		if (!user){
+			return { error: "User not found" }
+		}
+
 		return { success: "Logged in", data: user }
 	} catch (error) {
 		if (error instanceof AuthError) {
