@@ -9,6 +9,9 @@ export default auth(async function middleware(req) {
 	const isLoggedIn = !!req.auth
 	const user = req.auth?.user
 	
+	if (!user){
+		new URL("/login", nextUrl)
+	}
 	
 	return
 })
