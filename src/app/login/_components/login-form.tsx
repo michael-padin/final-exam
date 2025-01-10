@@ -18,23 +18,23 @@ import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
 import { register } from "@/app/actions/register";
 import { SignupSchema, SignupSchemaType } from "@/types/signup";
-import Link from "next/link";
+import { login } from "@/app/actions/login";
+import { LoginSchema, LoginSchemaType } from "@/types/login";
 
-export const SignupForm = () => {
+export const LoginForm = () => {
 	const router = useRouter();
 	const [isPending, startTransition] = useTransition();
-	const form = useForm<SignupSchemaType>({
-		resolver: zodResolver(SignupSchema),
+	const form = useForm<LoginSchemaType>({
+		resolver: zodResolver(LoginSchema),
 		defaultValues: {
-			name: "",
 			email: "",
 			password: "",
 		},
 	});
 
-	const onSubmit = async (data: SignupSchemaType) => {
+	const onSubmit = async (data: LoginSchemaType	) => {
 		startTransition(async () => {
-			const hello = await register(data);
+			const hello = await login(data);
 
 			// if (error) {
 			// 	showErrorToast(error)
@@ -48,24 +48,7 @@ export const SignupForm = () => {
 		<Form {...form}>
 			<form onSubmit={form.handleSubmit(onSubmit)} autoComplete="off">
 				<fieldset disabled={isPending} className="space-y-4 w-full">
-					<FormField
-						control={form.control}
-						name="name"
-						render={({ field }) => (
-							<FormItem>
-								<FormLabel>Name</FormLabel>
-								<FormControl>
-									<Input
-										{...field}
-										placeholder="John"
-										autoComplete="off"
-										className="w-full"
-									/>
-								</FormControl>
-								<FormMessage />
-							</FormItem>
-						)}
-					/>
+				
 					<FormField
 						control={form.control}
 						name="email"
@@ -117,10 +100,7 @@ export const SignupForm = () => {
 					/> */}
 
 					<Button type="submit" className="w-full" disabled={isPending}>
-						{isPending ? <Loader2 className="animate-spin" /> : "Register"}
-					</Button>
-					<Button type="submit" className="w-full" disabled={isPending} asChild variant={"secondary"}>
-						<Link href="/login">Login</Link>
+						{isPending ? <Loader2 className="animate-spin" /> : "Login"}
 					</Button>
 				</fieldset>
 			</form>
