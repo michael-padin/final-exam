@@ -1,66 +1,64 @@
-import { compare } from "bcryptjs"
-import type { NextAuthConfig } from "next-auth"
-import { type Provider } from "next-auth/providers"
-import Credentials from "next-auth/providers/credentials"
-import Google from "next-auth/providers/google"
-import { LoginSchema } from "./types/login"
-import { db } from "./lib/db"
-
+import { compare } from "bcryptjs";
+import type { NextAuthConfig } from "next-auth";
+import { type Provider } from "next-auth/providers";
+import Credentials from "next-auth/providers/credentials";
+import Google from "next-auth/providers/google";
+import { LoginSchema } from "./types/login";
+import { db } from "./lib/db";
 
 const providers: Provider[] = [
 	Credentials({
 		async authorize(credentials) {
-			const validateFields = LoginSchema.safeParse(credentials)
-			if (!validateFields.success) return null
+			const validateFields = LoginSchema.safeParse(credentials);
+			if (!validateFields.success) return null;
 
-			const { email, password } = validateFields.data
+			const { email, password } = validateFields.data;
 			const user = await db.user.findFirst({
 				where: {
-					email
-				}
-			})
+					email,
+				},
+			});
 
-			if (!user || !user.password) return null
+			if (!user || !user.password) return null;
 
 			// compare the actual password and the hash password
-			const passwordMatch = await compare(password, user.password)
+			const passwordMatch = await compare(password, user.password);
 
 			if (passwordMatch) {
 				const newUser = {
 					id: user.id,
 					name: user.name || "",
 					email: user.email,
-					
-				}
+				};
 
-				return newUser
+				return newUser;
 			}
-			return null
-		}
+			return null;
+		},
 	}),
 	Google({
 		clientId: process.env.AUTH_GOOGLE_ID,
-		clientSecret: process.env.AUTH_GOOGLE_SECRET
-	})
-]
+		clientSecret: process.env.AUTH_GOOGLE_SECRET,
+	}),
+];
 
 export default {
 	providers,
 	debug: process.env.NODE_ENV === "development",
 	pages: {
-		signIn: "/login"
+		signIn: "/login",
 	},
 
 	callbacks: {
 		async jwt({ token, user, trigger, session }) {
 			if (user) {
-				token.user = { ...user, id: user.id || "" }
+				token.user = { ...user, id: user.id || "", name: user.name || "" };
 			}
 			if (trigger === "update" && session) {
-				token = { ...token, user: session }
+				token = { ...token, user: session };
 			}
 
-			return token
+			return token;
 		},
 		async session({ session, token }) {
 			session = {
@@ -72,11 +70,11 @@ export default {
 					email: token.user.email || "",
 					image: token.user.image,
 					name: token.user.name,
-				}
-			}
+				},
+			};
 
-			return session
-		}
+			return session;
+		},
 	},
-	secret: process.env.AUTH_SECRET
-} satisfies NextAuthConfig
+	secret: process.env.AUTH_SECRET,
+} satisfies NextAuthConfig;
