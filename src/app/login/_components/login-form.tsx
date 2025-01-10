@@ -107,7 +107,7 @@ export const LoginForm = () => {
 						asChild
 						variant={"secondary"}
 					>
-						<Link href="/sign-up">Login</Link>
+						<Link href="/sign-up">Sign up</Link>
 					</Button>
 				</fieldset>
 			</form>
