@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
+import { Toaster } from "@/components/ui/toaster";
 
 const inter = Poppins({
 	subsets: ["latin"],
@@ -12,18 +13,15 @@ export const metadata: Metadata = {
 	description: "Encrypt or decrypt your secret messages",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
 	children,
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
 	return (
 		<html lang="en">
-			<body
-				className={`${inter.className} `}
-			>
-				
-
+			<body className={`${inter.className} `}>
+				<Toaster />
 				{children}
 			</body>
 		</html>
