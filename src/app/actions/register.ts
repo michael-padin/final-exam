@@ -24,6 +24,8 @@ export const register = async (data: SignupSchemaType) => {
 				isEmailVerified: false
 			}
 		})
+
+		console.log('newUser :>> ', newUser);
 		
 
 

@@ -16,8 +16,6 @@ import {
 import { Input } from "@/components/ui/input";
 
 import { useRouter } from "next/navigation";
-import { register } from "@/app/actions/register";
-import { SignupSchema, SignupSchemaType } from "@/types/signup";
 import { login } from "@/app/actions/login";
 import { LoginSchema, LoginSchemaType } from "@/types/login";
 

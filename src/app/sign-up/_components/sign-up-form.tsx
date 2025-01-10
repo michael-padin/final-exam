@@ -35,7 +35,7 @@ export const SignupForm = () => {
 	const onSubmit = async (data: SignupSchemaType) => {
 		startTransition(async () => {
 			const hello = await register(data);
-
+			console.log('hello :>> ', hello);
 			// if (error) {
 			// 	showErrorToast(error)
 			// 	return

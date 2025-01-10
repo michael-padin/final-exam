@@ -2,7 +2,6 @@
 import { signIn } from "@/auth";
 import { db } from "@/lib/db";
 import { LoginSchema, LoginSchemaType } from "@/types/login";
-import { hash } from "bcryptjs";
 import { AuthError } from "next-auth";
 
 export const login = async (data: LoginSchemaType) => {

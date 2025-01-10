@@ -7,7 +7,6 @@ export default auth(async function middleware(req) {
 	const { nextUrl } = req
 	const { pathname } = nextUrl
 	const isLoggedIn = !!req.auth
-	const user = req.auth?.user
 
 	console.log('pathname :>> ', pathname);
 	
