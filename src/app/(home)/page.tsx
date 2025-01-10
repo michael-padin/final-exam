@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import TodoForm from "../_components/todo-form";
 import TodoList from "../_components/todo-list";
 import { auth } from "@/auth";
+import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 export const metadata: Metadata = {
 	title: "",
@@ -17,17 +18,22 @@ export default async function HomePage() {
 
 	const userId = session.user.id;
 	return (
-		<main className="container mx-auto p-4">
+		<main className="max-w-screen-md mx-auto p-4">
 			<h1 className="text-3xl font-bold mb-8">Todo List</h1>
 			<div className="grid grid-cols-1 md:grid-cols-2 gap-8">
 				<div>
-					<h2 className="text-2xl font-semibold mb-4">Create a New Todo</h2>
-					<TodoForm userId={userId} />
+					<Card>
+						<CardHeader>
+							<CardTitle>Create a New Todo</CardTitle>
+							<CardDescription>Create a new todo item</CardDescription>
+							<TodoForm userId={userId} />
+						</CardHeader>
+					</Card>
 				</div>
 				<div>
 					<h2 className="text-2xl font-semibold mb-4">Your Todos</h2>
 					<TodoList userId={userId} />
-				</div>
+				</div>		
 			</div>
 		</main>
 	);

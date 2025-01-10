@@ -9,18 +9,18 @@ export default async function TodoList({ userId }: { userId: string }) {
   })
 
   return (
-    <ul className="space-y-4">
+    <ul className="space-y-2">
       {todos.map((todo) => (
-        <li key={todo.id} className="flex items-center space-x-4 bg-white shadow rounded-lg p-4">
+        <li key={todo.id} className="flex items-center space-x-4 bg-white shadow rounded-lg px-4 py-2">
           <input
             type="checkbox"
             checked={todo.completed}
             readOnly
-            className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+            className="h-4 w-4 text-primary focus:ring-primary border rounded"
           />
           <div>
-            <h3 className="text-lg font-semibold">{todo.title}</h3>
-            <p className="text-gray-600">{todo.description}</p>
+            <h3 className="text-sm   font-semibold">{todo.title}</h3>
+            <p className="text-muted-foreground text-xs">{todo.description}</p>
           </div>
         </li>
       ))}

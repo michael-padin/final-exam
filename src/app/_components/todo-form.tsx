@@ -115,7 +115,7 @@ export default function TodoForm({ userId }: { userId: string }) {
 						</FormItem>
 					)}
 				/>
-				<Button type="submit" disabled={isPending}>
+				<Button type="submit" disabled={isPending} className="w-full">
 					{isPending ? "Creating..." : "Create Todo"}
 				</Button>
 			</form>
